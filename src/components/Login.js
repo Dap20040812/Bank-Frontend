@@ -6,24 +6,45 @@ function Login() {
   const [isRegistering, setIsRegistering] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [errorMessage, setErrorMessage] = useState('')
+  const [emailErrorMessage, setEmailErrorMessage] = useState('')
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState('')
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
 
-    if (!email || !password) {
-      setErrorMessage('Please fill in all fields.')
+    if (email.trim() === ''  && password.trim() === '') {
+      setEmailErrorMessage('Please fill in all fields.')
+      setPasswordErrorMessage('Please fill in all fields.')
+      return
+    }
+
+    if (email.trim() === '' ) {
+      setEmailErrorMessage('Please fill in all fields.')
+      if(!(password.trim() === '')) {
+        setPasswordErrorMessage('')
+      }
       return
     }
     
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
-      setErrorMessage('Please enter a valid email address.')
+      setEmailErrorMessage('Please enter a valid email address.')
+      if(!(password.trim() === '')) {
+        setPasswordErrorMessage('')
+      }
       return
     }
 
-    setErrorMessage('')
+    if(password.trim() === '') {
+      setPasswordErrorMessage('Please fill in all fields.')
+      if (emailRegex.test(email) || !(email.trim() === '' )) {
+        setEmailErrorMessage('')
+      }
+      return
+    }
     
+    setEmailErrorMessage('')
+    setPasswordErrorMessage('')
   }
 
   return (
@@ -35,12 +56,14 @@ function Login() {
             <AccountQuestion> {!isRegistering ? "Don't have an account yet?" : "Already have an account?"} </AccountQuestion>
             <RegisterAndLoginButton onClick={() => setIsRegistering(!isRegistering)}> {!isRegistering ? "Create Account" : "Log In"} </RegisterAndLoginButton>
           </LeftInfo>
-          <LoginForm onSubmit={handleFormSubmit}>
+          <LoginForm>
             <LoginText>{isRegistering ? "Create Account" : "Log In"}</LoginText>
+            {emailErrorMessage && <ErrorMessage>{emailErrorMessage}</ErrorMessage>}
             <EmailInput placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)}/>
+            {passwordErrorMessage && <ErrorMessage>{passwordErrorMessage}</ErrorMessage>}
             <PasswordInput placeholder='Password' type='password' onChange={(e) => setPassword(e.target.value)}/>
-            <SendButton type='submit'> Send </SendButton>
-            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+            <SendButton type='submit' onClick={handleFormSubmit}> Send </SendButton>
+            
           </LoginForm>
         </LoginContainer>
     </Container>
@@ -87,7 +110,7 @@ const LoginForm = styled.div `
   height: 70vh;
   width: 40vw;
   border-radius: 35% 1.5rem 1.5rem 35%;
-  background-color: #F3C633
+  background-color: #F3C633;
 `
 
 const Title = styled.h2 `
@@ -275,6 +298,8 @@ const AccountQuestion = styled.div `
 
 const ErrorMessage = styled.div `
   color: red;
-  font-size: 1.5rem;
-  margin-top: 1rem;
+  font-size: 2.25vh;
+  align-self: flex-start;
+  margin-left: 6vw;
+  margin-top: 2vh;
 `
