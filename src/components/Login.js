@@ -59,7 +59,7 @@ function Login() {
           <LoginForm>
             <LoginText>{isRegistering ? "Create Account" : "Log In"}</LoginText>
             {emailErrorMessage && <ErrorMessage>{emailErrorMessage}</ErrorMessage>}
-            <EmailInput placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <EmailInput placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
             {passwordErrorMessage && <ErrorMessage>{passwordErrorMessage}</ErrorMessage>}
             <PasswordInput placeholder='Password' type='password' onChange={(e) => setPassword(e.target.value)}/>
             <SendButton type='submit' onClick={handleFormSubmit}> Send </SendButton>
