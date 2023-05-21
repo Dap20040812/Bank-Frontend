@@ -1,25 +1,28 @@
 import React from 'react'
 import styled from 'styled-components'
 import Card from './Card'
+import SideBar from './SideBar'
 
 function Home() {
   return (
     <Container>
         <HomeWrapper>
-            <Title>Welcome to Bank Buddy!</Title>
-            <AccountsTitle>Your Accounts</AccountsTitle>
-            <CardWrapper>
-                <Card />
-                <Card />
-                <AddCard>
-                    <AddButton> 
-                        <AddSymbol>
-                            +
-                        </AddSymbol>
-                    </AddButton>
-                </AddCard>
-            </CardWrapper>
-            
+            <SideBar />
+            <ContentWrapper>
+                <Title>Welcome to Bank Buddy!</Title>
+                <AccountsTitle>Your Accounts</AccountsTitle>
+                <CardWrapper>
+                    <Card />
+                    <Card />
+                    <AddCard>
+                        <AddButton> 
+                            <AddSymbol>
+                                +
+                            </AddSymbol>
+                        </AddButton>
+                    </AddCard>
+                </CardWrapper>
+            </ContentWrapper>
         </HomeWrapper>
     </Container>
   )
@@ -28,27 +31,29 @@ function Home() {
 export default Home
 
 const Container = styled.div `
-
-  display: flex;
-  height: max-content;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  height: 100vh;
-  width: 100vw;
-  background-color: #F0F4EF;
+    display: flex;
+    height: max-content;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    background-color: #F0F4EF;
 `
 
 const HomeWrapper = styled.div `
+    width: 90vw;
+    height: 90vh;
+    border-radius: 1.5rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    display: flex;
+`
 
-  width: 90vw;
-  height: 90vh;
-  border-radius: 1.5rem;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+const ContentWrapper = styled.div `
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 `
 
 const Title = styled.div `
