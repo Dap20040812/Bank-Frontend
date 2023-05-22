@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Card from './Card'
+import RecentTransactions from './RecentTransactions'
 import SideBar from './SideBar'
 
 function Home() {
@@ -22,6 +23,7 @@ function Home() {
                         </AddButton>
                     </AddCard>
                 </CardWrapper>
+                <RecentTransactions />
             </ContentWrapper>
         </HomeWrapper>
     </Container>
@@ -59,7 +61,6 @@ const ContentWrapper = styled.div `
 const Title = styled.div `
     font-size: 6vh;
     margin: 0 0 6vh 3vw;
-    align-self: flex-start;
     color: #172B3A;
 `
 
@@ -69,8 +70,8 @@ const CardWrapper = styled.div `
 
 const AddCard = styled.div `
     background-color: #DDDACD;
-    width: 300px;
-    height: 192.5px;
+    width: 240px;
+    height: 154px;
     perspective: 1000px;
     border-radius: 2vh;
     margin: 0 3vw;

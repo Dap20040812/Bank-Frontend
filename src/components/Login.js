@@ -63,7 +63,6 @@ function Login() {
             {passwordErrorMessage && <ErrorMessage>{passwordErrorMessage}</ErrorMessage>}
             <PasswordInput placeholder='Password' type='password' onChange={(e) => setPassword(e.target.value)}/>
             <SendButton type='submit' onClick={handleFormSubmit}> Send </SendButton>
-            
           </LoginForm>
         </LoginContainer>
     </Container>

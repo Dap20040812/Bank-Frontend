@@ -52,8 +52,8 @@ export default Card
 
 const FlipCard = styled.div`
   background-color: #1D3B64;
-  width: 300px;
-  height: 192.5px;
+  width: 240px;
+  height: 154px;
   perspective: 1000px;
   border-radius: 2vh;
   margin: 0 3vw;
@@ -79,36 +79,38 @@ const FlipCardFront = styled.div`
 const Heading = styled.p`
   position: absolute;
   letter-spacing: 0.2em;
-  font-size: 0.675em;
+  font-size: 0.6em;
   top: 3em;
-  left: 16.5em;
+  left: 14em;
   color: #F0F4EF;
 `
 
 const Logo = styled.svg`
   position: absolute;
-  top: 7.5em;
-  left: 14em;
+  top: 5.5em;
+  left: 11em;
 `
 
 const Chip = styled.svg`
   position: absolute;
-  top: 2.5em;
+  top: 1.75em;
   left: 2em;
 `
 
 const Number = styled.p`
   position: absolute;
-  top: 7.5em;
-  left: 1.5em;
+  top: 6.5em;
+  left: 1em;
   color: #F0F4EF;
+  font-size: 0.9rem;
 `
 
 const Name = styled.p`
   position: absolute;
-  bottom: 3em;
-  left: 1.5em;
+  bottom: 2.5em;
+  left: 1em;
   color: #F0F4EF;
+  font-size: 0.9rem;
 `
 
 const FlipCardBack = styled.div`
