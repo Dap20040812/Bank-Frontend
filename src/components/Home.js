@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Card from './Card'
 import RecentTransactions from './RecentTransactions'
 import SideBar from './SideBar'
 
 function Home() {
+
   return (
     <Container>
         <HomeWrapper>

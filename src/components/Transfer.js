@@ -2,47 +2,60 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import SideBar from './SideBar'
 
-function Deposit() {
+function Transfer() {
 
     //Agregar droplist para escoger la cuenta
 
     const [amount, setAmount] = useState('')
-    const [errorMessage, setErrorMessage] = useState('')
+    const [ID, setID] = useState('')
+    const [amountErrorMessage, setAmountErrorMessage] = useState('')
+    const [IDErrorMessage, setIDErrorMessage] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        if (typeof amount != 'number') {
-            setErrorMessage('Please input a number.')
+        if(ID.trim() === '' && typeof amount != 'number') {
+            setIDErrorMessage('Please input an account ID.')
+            setAmountErrorMessage('Please input a number.')
             return
         }
 
-        setErrorMessage('')
+        if (ID.trim() === '') {
+            setIDErrorMessage('Please input an account ID.')
+            return
+        }
+
+        if (typeof amount != 'number') {
+            setAmountErrorMessage('Please input a number.')
+            return
+        }
+
+        setAmountErrorMessage('')
+        setIDErrorMessage('')
     }
 
   return (
     <Container>
         <Wrapper>
             <SideBar />
-            <DepositWrapper>
-                <Title>Make a Deposit</Title>
-                <AccountTitle>
-                    Please select the account you want to make the deposit to:
-                </AccountTitle>
-                <AccountInput placeholder='Account'/>
-                <AmountTitle>
-                    Please input the amount you want to deposit to the account:
-                </AmountTitle>
-                {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+            <TransferWrapper>
+                <Title>Transfer to Another Account</Title>
+                <AccountTitle>Please select the account you want to make the transfer from:</AccountTitle>
+                <AccountInput placeholder='Account' />
+                <AccountTitle>Please input the ID of the account that will receive the transfer:</AccountTitle>
+                {IDErrorMessage && <ErrorMessage>{IDErrorMessage}</ErrorMessage>}
+                <AccountInput placeholder='Account ID' value={ID} onChange={(e) => setID(e.target.value)} />
+                <AccountTitle>Please input the amount you want to transfer:</AccountTitle>
+                {amountErrorMessage && <ErrorMessage>{amountErrorMessage}</ErrorMessage>}
                 <AmountInput placeholder='Amount' value={amount} onChange={(e) => setAmount(e.target.value)} />
-                <DepositButton onClick={handleSubmit}>Deposit</DepositButton>
-            </DepositWrapper>
+                <TransferButton onClick={handleSubmit}>Transfer</TransferButton>
+            </TransferWrapper>
         </Wrapper>
     </Container>
   )
 }
 
-export default Deposit
+export default Transfer
 
 const Container = styled.div `
     display: flex;
@@ -64,7 +77,7 @@ const Wrapper = styled.div `
     display: flex;
 `
 
-const DepositWrapper = styled.div `
+const TransferWrapper = styled.div `
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -74,6 +87,10 @@ const Title = styled.div `
     font-size: 6vh;
     margin: 0 0 6vh 3vw;
     color: #172B3A;
+`
+const AccountTitle = styled.div `
+    margin-left: 3vw;
+    font-size: 4vh;
 `
 
 const AccountInput = styled.input `
@@ -106,17 +123,7 @@ const ErrorMessage = styled.div `
   margin-top: 2vh;
 `
 
-const AccountTitle = styled.div `
-    margin-left: 3vw;
-    font-size: 4vh;
-`
-
-const AmountTitle = styled.div `
-    margin-left: 3vw;
-    font-size: 4vh;
-`
-
-const DepositButton = styled.div `
+const TransferButton = styled.div `
 
   display: inline-block;
   cursor: pointer;

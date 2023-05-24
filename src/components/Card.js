@@ -38,10 +38,6 @@ function Card() {
         <FlipCardBack>
           <BalanceTitle>Account Balance:</BalanceTitle>
           <Balance>1000</Balance>
-          <ButtonsContainer>
-            <DepositButton>Deposit</DepositButton>
-            <TransferButton>Transfer</TransferButton>
-          </ButtonsContainer>
         </FlipCardBack>
       </FlipCardInner>
     </FlipCard>
@@ -128,43 +124,11 @@ const FlipCardBack = styled.div`
 const BalanceTitle = styled.div `
     text-align: left;
     margin-left: 1.75rem;
-    font-size: 1.2em;
+    font-size: 1.3em;
 `
 
 const Balance = styled.div `
     text-align: left;
     margin-left: 1.75rem;
-`
-
-const ButtonsContainer = styled.div `
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    margin-top: 1.5rem;
-`
-
-const DepositButton = styled.div `
-    background-color: #F4C93E;
-    border-radius: 0.5rem;
-    width: 5rem;
-    height: 1.75rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #172B3A;
-    font-weight: 600;
-    cursor: pointer;
-`
-
-const TransferButton = styled.div `
-    background-color: #F4C93E;
-    border-radius: 0.5rem;
-    width: 5rem;
-    height: 1.75rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #172B3A;
-    font-weight: 600;
-    cursor: pointer;
+    font-size: 1.3em;
 `
