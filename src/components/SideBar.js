@@ -18,9 +18,11 @@ function SideBar() {
                 </StyledLink>
             </Icon>
             <Icon>
-                <AddCardIcon color='#172B3A' fontSize='large'/>
-                <IconText>Add</IconText>
-                <IconText>Account</IconText>
+                <StyledLink to='/createaccount' >
+                    <AddCardIcon color='#172B3A' fontSize='large'/>
+                    <IconText>Add</IconText>
+                    <IconText>Account</IconText>
+                </StyledLink>
             </Icon>
             <Icon>
                 <StyledLink to='/deposit' >

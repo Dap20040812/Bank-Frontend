@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Card from './Card'
 import RecentTransactions from './RecentTransactions'
 import SideBar from './SideBar'
+import { Link } from 'react-router-dom';
 
 function Home() {
 
@@ -18,9 +19,11 @@ function Home() {
                     <Card />
                     <AddCard>
                         <AddButton> 
-                            <AddSymbol>
-                                +
-                            </AddSymbol>
+                            <StyledLink to='/createaccount' >
+                                <AddSymbol>
+                                    +
+                                </AddSymbol>
+                            </StyledLink>
                         </AddButton>
                     </AddCard>
                 </CardWrapper>
@@ -103,4 +106,13 @@ const AccountsTitle = styled.div `
     font-weight: 600;
     color: #E98A15;
     margin: 0 0 3vh 3vw;
+`
+
+const StyledLink = styled(Link) `
+    color: #172B3A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
 `

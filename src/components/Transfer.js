@@ -88,6 +88,7 @@ const Title = styled.div `
     margin: 0 0 6vh 3vw;
     color: #172B3A;
 `
+
 const AccountTitle = styled.div `
     margin-left: 3vw;
     font-size: 4vh;

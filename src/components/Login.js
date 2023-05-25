@@ -4,63 +4,43 @@ import styled from 'styled-components'
 function Login() {
 
   const [isRegistering, setIsRegistering] = useState(false)
-  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [emailErrorMessage, setEmailErrorMessage] = useState('')
-  const [passwordErrorMessage, setPasswordErrorMessage] = useState('')
+  const [name, setName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [documentID, setDocumentID] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
 
-    if (email.trim() === ''  && password.trim() === '') {
-      setEmailErrorMessage('Please fill in all fields.')
-      setPasswordErrorMessage('Please fill in all fields.')
-      return
-    }
-
-    if (email.trim() === '' ) {
-      setEmailErrorMessage('Please fill in all fields.')
-      if(!(password.trim() === '')) {
-        setPasswordErrorMessage('')
-      }
+    if (password.trim() === '' || name.trim() === '' || lastName.trim() === '' || documentID.trim() === '') {
+      setErrorMessage('Please verify all fields before submitting.')
       return
     }
     
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
-      setEmailErrorMessage('Please enter a valid email address.')
-      if(!(password.trim() === '')) {
-        setPasswordErrorMessage('')
-      }
-      return
-    }
-
-    if(password.trim() === '') {
-      setPasswordErrorMessage('Please fill in all fields.')
-      if (emailRegex.test(email) || !(email.trim() === '' )) {
-        setEmailErrorMessage('')
-      }
-      return
-    }
-    
-    setEmailErrorMessage('')
-    setPasswordErrorMessage('')
+    setErrorMessage('')
   }
 
   return (
     <Container>
         <LoginContainer>
           <LeftInfo>
-            <Title> Buddy Bank </Title>
+            <Logo src='images/logo.png'/>
             <Info> Keep your money in a safe place.</Info>
             <AccountQuestion> {!isRegistering ? "Don't have an account yet?" : "Already have an account?"} </AccountQuestion>
             <RegisterAndLoginButton onClick={() => setIsRegistering(!isRegistering)}> {!isRegistering ? "Create Account" : "Log In"} </RegisterAndLoginButton>
           </LeftInfo>
           <LoginForm>
             <LoginText>{isRegistering ? "Create Account" : "Log In"}</LoginText>
-            {emailErrorMessage && <ErrorMessage>{emailErrorMessage}</ErrorMessage>}
-            <EmailInput placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
-            {passwordErrorMessage && <ErrorMessage>{passwordErrorMessage}</ErrorMessage>}
+            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+            {isRegistering && (
+              <>
+                <NameInput placeholder='Name' value={name} onChange={(e) => setName(e.target.value)}/>
+                <LastNameInput placeholder='Last Name' value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+              </>
+            )}
+            
+            <DocumentInput placeholder='Document ID' value={documentID} onChange={(e) => setDocumentID(e.target.value)}/>
             <PasswordInput placeholder='Password' type='password' onChange={(e) => setPassword(e.target.value)}/>
             <SendButton type='submit' onClick={handleFormSubmit}> Send </SendButton>
           </LoginForm>
@@ -112,20 +92,19 @@ const LoginForm = styled.div `
   background-color: #F3C633;
 `
 
-const Title = styled.h2 `
-  
-  color: #172B3A;
-  font-size: 8vh;
+const Logo = styled.img `
+  width: 25vw;
+  margin-bottom: 2vh;
 `
 
-const LoginText = styled.h2 `
+const LoginText = styled.div `
 
   color: #172B3A;
   font-size: 6vh;
-  margin-bottom: 6vh;
+  margin-bottom: 5vh;
 `
 
-const EmailInput = styled.input `
+const NameInput = styled.input `
   width: 25vw;
   height: 3vh;
   background: #F0F4EF;
@@ -133,18 +112,19 @@ const EmailInput = styled.input `
   border: none;
   outline: none;
   border-radius: 4px;
-  margin: 2vh;
+  margin: 0.75vh 2vh 0.75vh 2vh;
 `
 
-const PasswordInput = styled.input `
-  width: 25vw;
-  height: 3vh;
-  background: #F0F4EF;
-  padding: 10px;
-  border: none;
-  outline: none;
-  border-radius: 4px;
-  margin: 2vh;
+const LastNameInput = styled(NameInput) `
+
+`
+
+const DocumentInput = styled(NameInput) `
+
+`
+
+const PasswordInput = styled(NameInput) `
+
 `
 
 const Info = styled.div `
