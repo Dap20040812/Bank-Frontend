@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import axios from "axios"
+import {useDispatch, useSelector} from "react-redux"
+import { setUserLogin , selecUserName} from '../features/user/UserSlice'
+import { useNavigate} from 'react-router-dom'
 
 function Login() {
 
@@ -9,16 +13,74 @@ function Login() {
   const [lastName, setLastName] = useState('')
   const [documentID, setDocumentID] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
+  const dispatch = useDispatch()
+  const [user, setUser] = useState()  
+  const navigate = useNavigate()
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async(e) => {
     e.preventDefault()
+    if(isRegistering){
+      if (password.trim() === '' || name.trim() === '' || lastName.trim() === '' || documentID.trim() === '') {
+        setErrorMessage('Please verify all fields before submitting.')
+        return
+      }
+      else{
+        await axios.post("http://localhost:8080/users",{
+          document: documentID,
+          name: name,
+          lastName: lastName,
+          password: password
+        }).then((response) => {
+          setUser(response.data);
+        });
+  
+        if(user != null)
+        {
+          dispatch(setUserLogin({
+            name: user.name,
+            lastName: user.lastName,
+            document: user.document
+            
+          })) 
+          navigate("/")
+        }
+        else{
+          setErrorMessage('Please verify all fields before submitting.')
+        }
+      }    
+      setErrorMessage('')
+    }
+    else{
 
-    if (password.trim() === '' || name.trim() === '' || lastName.trim() === '' || documentID.trim() === '') {
+    if (password.trim() === '' || documentID.trim() === '') {
       setErrorMessage('Please verify all fields before submitting.')
       return
     }
+    await axios.get("http://localhost:8080/login", {
+      params: {
+        document: documentID,
+        password: password
+      }
+    }).then((response) => {
+      setUser(response.data);
+      console.log(response.data)
+    });
+    if(user.document !== 0 && user.document !== null)
+      {
+        dispatch(setUserLogin({
+          name: user.name,
+          lastName: user.lastName,
+          document: user.document
+          
+        })) 
+        navigate("/")
+      }
+      else{
+        setErrorMessage('Please verify all fields before submitting.')
+      }
+      setErrorMessage('')
+    }
     
-    setErrorMessage('')
   }
 
   return (
@@ -40,7 +102,7 @@ function Login() {
               </>
             )}
             
-            <DocumentInput placeholder='Document ID' value={documentID} onChange={(e) => setDocumentID(e.target.value)}/>
+            <DocumentInput placeholder='Document ID' value={documentID} type='number' onChange={(e) => setDocumentID(e.target.value)}/>
             <PasswordInput placeholder='Password' type='password' onChange={(e) => setPassword(e.target.value)}/>
             <SendButton type='submit' onClick={handleFormSubmit}> Send </SendButton>
           </LoginForm>

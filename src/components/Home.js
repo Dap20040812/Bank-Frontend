@@ -4,30 +4,23 @@ import Card from './Card'
 import RecentTransactions from './RecentTransactions'
 import SideBar from './SideBar'
 import { Link } from 'react-router-dom';
+import {useSelector} from "react-redux"
+import {selecUserName, selecUserLastName} from '../features/user/UserSlice'
 
 function Home() {
+
+    const name = useSelector(selecUserName)
 
   return (
     <Container>
         <HomeWrapper>
             <SideBar />
             <ContentWrapper>
-                <Title>Welcome to Bank Buddy!</Title>
+                <Title>Welcome {name} to Bank Buddy!</Title>
                 <AccountsTitle>Your Accounts</AccountsTitle>
                 <CardWrapper>
                     <Card />
-                    <Card />
-                    <AddCard>
-                        <AddButton> 
-                            <StyledLink to='/createaccount' >
-                                <AddSymbol>
-                                    +
-                                </AddSymbol>
-                            </StyledLink>
-                        </AddButton>
-                    </AddCard>
                 </CardWrapper>
-                <RecentTransactions />
             </ContentWrapper>
         </HomeWrapper>
     </Container>

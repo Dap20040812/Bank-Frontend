@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import SideBar from './SideBar'
+import axios from 'axios'
 
 function Transfer() {
 
-    //Agregar droplist para escoger la cuenta
 
     const [amount, setAmount] = useState('')
     const [ID, setID] = useState('')
     const [amountErrorMessage, setAmountErrorMessage] = useState('')
     const [IDErrorMessage, setIDErrorMessage] = useState('')
+    const [account, setAccount] = useState('')
+    const [message,setMessage] = useState();
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -25,13 +27,21 @@ function Transfer() {
             return
         }
 
-        if (typeof amount != 'number') {
-            setAmountErrorMessage('Please input a number.')
-            return
-        }
-
+        makeTranfer()
         setAmountErrorMessage('')
         setIDErrorMessage('')
+    }
+
+    const makeTranfer = async() =>{
+      await axios.put("http://localhost:8080/transfer",{
+        origin: account,
+        destination:ID,
+        depositAmount: amount
+      }).then((response) => {
+        setMessage(response.data);
+      }).catch((error) => {
+        setMessage("Error")
+      });
     }
 
   return (
@@ -41,7 +51,7 @@ function Transfer() {
             <TransferWrapper>
                 <Title>Transfer to Another Account</Title>
                 <AccountTitle>Please select the account you want to make the transfer from:</AccountTitle>
-                <AccountInput placeholder='Account' />
+                <AccountInput placeholder='Account' value={account} onChange={(e) => setAccount(e.target.value)}/>
                 <AccountTitle>Please input the ID of the account that will receive the transfer:</AccountTitle>
                 {IDErrorMessage && <ErrorMessage>{IDErrorMessage}</ErrorMessage>}
                 <AccountInput placeholder='Account ID' value={ID} onChange={(e) => setID(e.target.value)} />
@@ -49,6 +59,7 @@ function Transfer() {
                 {amountErrorMessage && <ErrorMessage>{amountErrorMessage}</ErrorMessage>}
                 <AmountInput placeholder='Amount' value={amount} onChange={(e) => setAmount(e.target.value)} />
                 <TransferButton onClick={handleSubmit}>Transfer</TransferButton>
+                <p>{message}</p>
             </TransferWrapper>
         </Wrapper>
     </Container>

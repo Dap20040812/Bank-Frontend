@@ -1,23 +1,30 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import SideBar from './SideBar'
+import axios from 'axios'
 
 function Deposit() {
 
-    //Agregar droplist para escoger la cuenta
-
     const [amount, setAmount] = useState('')
+    const [account, setAccount] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
+    const [message,setMessage] = useState();
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        if (typeof amount != 'number') {
-            setErrorMessage('Please input a number.')
-            return
-        }
+        makeDeposit()
 
         setErrorMessage('')
+    }
+
+    const makeDeposit = async() =>{
+      await axios.put("http://localhost:8080/deposit",{
+        accountNumber: account,
+        depositAmount: amount
+      }).then((response) => {
+        setMessage(response.data);
+      });
     }
 
   return (
@@ -29,13 +36,14 @@ function Deposit() {
                 <AccountTitle>
                     Please select the account you want to make the deposit to:
                 </AccountTitle>
-                <AccountInput placeholder='Account'/>
+                <AccountInput placeholder='Account' value={account} onChange={(e) => setAccount(e.target.value)}/>
                 <AmountTitle>
                     Please input the amount you want to deposit to the account:
                 </AmountTitle>
                 {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
                 <AmountInput placeholder='Amount' value={amount} onChange={(e) => setAmount(e.target.value)} />
                 <DepositButton onClick={handleSubmit}>Deposit</DepositButton>
+                <p>message</p>
             </DepositWrapper>
         </Wrapper>
     </Container>

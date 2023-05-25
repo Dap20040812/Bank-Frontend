@@ -1,8 +1,39 @@
-import React from 'react'
+import React , {useState}from 'react'
 import styled from 'styled-components'
 import SideBar from './SideBar'
+import { Savings } from '@mui/icons-material';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import {selecUserName, selecUserLastName, selecUserDocument} from '../features/user/UserSlice'
 
 function CreateAccount() {
+
+  const [selectedOption, setSelectedOption] = useState("");
+  const userId = useSelector(selecUserDocument)
+  const [message,setMessage] = useState();
+
+  const handleSelectChange = (e) => {
+    const selectedValue = e.target.value;
+    setSelectedOption(selectedValue);
+  };
+
+  const createAccount = async() =>{
+    console.log(selectedOption)
+
+    if(selectedOption === "savings"){
+        await axios.post(`http://localhost:8080//users/${userId}/AHORROS`)
+        .then((response) => {
+          setMessage(response.data)
+        });
+    }
+    else if(selectedOption === "current")
+    {
+      await axios.post(`http://localhost:8080//users/${userId}/CORRIENTE`)
+        .then((response) => {
+          setMessage(response.data)
+        });
+    }
+  }
   return (
     <Container>
         <Wrapper>
@@ -10,12 +41,14 @@ function CreateAccount() {
             <CreateAccountWrapper>
                 <Title>Create a New Account</Title>
                 <AccountTitle>Please select the type of account you want to create:</AccountTitle>
-                <Select>
-                    <Option>Savings</Option>
-                    <Option>Current</Option>
+                <Select value={selectedOption} onChange={handleSelectChange}>
+                  <Option value=""></Option>
+                  <Option value="savings">Savings</Option>
+                  <Option value="current">Current</Option>
                 </Select>
                 <Subtitle>Please remember the account ID is automatically generated.</Subtitle>
-                <CreateButton>Create Account</CreateButton>
+                <CreateButton onClick={createAccount}>Create Account</CreateButton>
+                <p>{message}</p>
             </CreateAccountWrapper>
         </Wrapper>
     </Container>
