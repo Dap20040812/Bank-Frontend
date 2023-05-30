@@ -12,8 +12,8 @@ function App() {
     <div className="main" >
       <BrowserRouter>
         <Routes>
+          <Route default path = '/login' element = {<Login />} />
           <Route path = '/' element = {<Home />} />
-          <Route path = '/login' element = {<Login />} />
           <Route path = '/createaccount' element = {<CreateAccount />} />
           <Route path = '/deposit' element = {<Deposit />} />
           <Route path = '/transfer' element = {<Transfer />} />

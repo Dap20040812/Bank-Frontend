@@ -24,6 +24,8 @@ function Deposit() {
         depositAmount: amount
       }).then((response) => {
         setMessage(response.data);
+      }).catch((error) =>{
+        setMessage("No se puedo completar la transaccion")
       });
     }
 
@@ -43,7 +45,7 @@ function Deposit() {
                 {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
                 <AmountInput placeholder='Amount' value={amount} onChange={(e) => setAmount(e.target.value)} />
                 <DepositButton onClick={handleSubmit}>Deposit</DepositButton>
-                <p>message</p>
+                <p>{message}</p>
             </DepositWrapper>
         </Wrapper>
     </Container>
@@ -76,11 +78,12 @@ const DepositWrapper = styled.div `
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-left: 2em;
 `
 
 const Title = styled.div `
     font-size: 6vh;
-    margin: 0 0 6vh 3vw;
+    margin: 0 0 6vh 0;
     color: #172B3A;
 `
 
@@ -92,7 +95,7 @@ const AccountInput = styled.input `
     border: 2px solid #DDDACD;
     outline: none;
     border-radius: 4px;
-    margin: 2vh 0 4vh 3vw;
+    margin: 2vh 0 4vh 0;
 `
 
 const AmountInput = styled.input `
@@ -103,7 +106,7 @@ const AmountInput = styled.input `
     border: 2px solid #DDDACD;
     outline: none;
     border-radius: 4px;
-    margin: 2vh 0 4vh 3vw;
+    margin: 2vh 0 4vh 0;
 `
 
 const ErrorMessage = styled.div `
@@ -115,12 +118,10 @@ const ErrorMessage = styled.div `
 `
 
 const AccountTitle = styled.div `
-    margin-left: 3vw;
     font-size: 4vh;
 `
 
 const AmountTitle = styled.div `
-    margin-left: 3vw;
     font-size: 4vh;
 `
 
@@ -130,13 +131,14 @@ const DepositButton = styled.div `
   cursor: pointer;
   text-align: center;
   transition: all 0.2s ease-in;
+  align-items: center;
+  justify-content: center;
   position: relative;
   overflow: hidden;
   z-index: 1;
   color: #F0F4EF;
-  padding: 0.7em 1.7em;
-  margin: 2vh 0 0 3vw;
-  width: 4.5vw;
+  padding: 0.5em;
+  width: 4em;
   font-size: 2.5vh;
   font-weight: 600;
   border-radius: 0.5em;

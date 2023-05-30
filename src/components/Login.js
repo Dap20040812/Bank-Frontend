@@ -32,6 +32,8 @@ function Login() {
           password: password
         }).then((response) => {
           setUser(response.data);
+        }).catch((error)=>{
+          setErrorMessage("No se pudo completar la acción")
         });
   
         if(user != null)
@@ -64,9 +66,13 @@ function Login() {
     }).then((response) => {
       setUser(response.data);
       console.log(response.data)
+    }).catch((error)=>{
+      setErrorMessage("No se pudo completar la acción")
     });
-    if(user.document !== 0 && user.document !== null)
+    console.log(user)
+    if(user !== undefined && user.document !== 0 && user.document !== null)
       {
+        console.log(user)
         dispatch(setUserLogin({
           name: user.name,
           lastName: user.lastName,

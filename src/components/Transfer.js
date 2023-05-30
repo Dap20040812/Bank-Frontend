@@ -40,7 +40,7 @@ function Transfer() {
       }).then((response) => {
         setMessage(response.data);
       }).catch((error) => {
-        setMessage("Error")
+        setMessage("No se puedo completar la transaccion")
       });
     }
 
@@ -92,16 +92,16 @@ const TransferWrapper = styled.div `
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-left: 2em;
 `
 
 const Title = styled.div `
     font-size: 6vh;
-    margin: 0 0 6vh 3vw;
+    margin: 0 0 6vh 0;
     color: #172B3A;
 `
 
 const AccountTitle = styled.div `
-    margin-left: 3vw;
     font-size: 4vh;
 `
 
@@ -113,7 +113,7 @@ const AccountInput = styled.input `
     border: 2px solid #DDDACD;
     outline: none;
     border-radius: 4px;
-    margin: 2vh 0 4vh 3vw;
+    margin: 2vh 0 4vh 0;
 `
 
 const AmountInput = styled.input `
@@ -124,14 +124,13 @@ const AmountInput = styled.input `
     border: 2px solid #DDDACD;
     outline: none;
     border-radius: 4px;
-    margin: 2vh 0 4vh 3vw;
+    margin: 2vh 0 4vh 0;
 `
 
 const ErrorMessage = styled.div `
   color: red;
   font-size: 2.25vh;
   align-self: flex-start;
-  margin-left: 3vw;
   margin-top: 2vh;
 `
 
@@ -145,16 +144,17 @@ const TransferButton = styled.div `
   overflow: hidden;
   z-index: 1;
   color: #F0F4EF;
-  padding: 0.7em 1.7em;
-  margin: 2vh 0 0 3vw;
-  width: 4.5vw;
+  padding: 1em;
+  width: 5em;
   font-size: 2.5vh;
   font-weight: 600;
   border-radius: 0.5em;
   background: #172B3A;
+  align-items: center;
   border: 1px solid #172B3A;
   box-shadow: 4px 4px 10px #F0F4EF,
              -2px -2px 5px #F0F4EF;
+             
 
   &:before {
     content: "";
