@@ -21,15 +21,15 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
+    - run: npm i
     - run: npm run build --if-present
 
-      - uses: mr-smithers-excellent/docker-build-push@v5
-        name: Build & push Docker image
-        with:
-          image: dap2004/example
-          tags: latest
-          registry: docker.io
-          dockerfile: Dockerfile
-          username: ${{ secrets.MI_USUARIO_DE_DOCKER }}
-          password: ${{ secrets.MI_SUPER_CLAVE }}
+    - uses: mr-smithers-excellent/docker-build-push@v5
+      name: Build & push Docker image
+      with:
+        image: dap2004/example
+        tags: latest
+        registry: docker.io
+        dockerfile: Dockerfile
+        username: ${{ secrets.MI_USUARIO_DE_DOCKER }}
+        password: ${{ secrets.MI_SUPER_CLAVE }}
