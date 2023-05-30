@@ -13,21 +13,27 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [12.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm i
-    - run: npm run build --if-present
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build
+      run: npm run build
 
     - uses: mr-smithers-excellent/docker-build-push@v5
       name: Build & push Docker image
       with:
-        image: dap2004/example
+        image: dap2004/projectofinal-react-app
         tags: latest
         registry: docker.io
         dockerfile: Dockerfile
