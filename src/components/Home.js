@@ -1,11 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import Card from './Card'
-import RecentTransactions from './RecentTransactions'
 import SideBar from './SideBar'
 import { Link } from 'react-router-dom';
 import {useSelector} from "react-redux"
-import {selecUserName, selecUserLastName} from '../features/user/UserSlice'
+import {selecUserName} from '../features/user/UserSlice'
 
 function Home() {
 

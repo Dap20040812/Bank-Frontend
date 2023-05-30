@@ -5,8 +5,8 @@ import AddCardIcon from '@mui/icons-material/AddCard';
 import SavingsIcon from '@mui/icons-material/Savings';
 import SendIcon from '@mui/icons-material/Send';
 import LogoutIcon from '@mui/icons-material/Logout';
-import {useDispatch, useSelector} from "react-redux"
-import { setUserLogin , selecUserName, setSignOut} from '../features/user/UserSlice'
+import {useDispatch} from "react-redux"
+import {setSignOut} from '../features/user/UserSlice'
 import { useNavigate} from 'react-router-dom'
 import { Link } from 'react-router-dom';
 

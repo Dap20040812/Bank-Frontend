@@ -1,10 +1,9 @@
 import React , {useState}from 'react'
 import styled from 'styled-components'
 import SideBar from './SideBar'
-import { Savings } from '@mui/icons-material';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import {selecUserName, selecUserLastName, selecUserDocument} from '../features/user/UserSlice'
+import {selecUserDocument} from '../features/user/UserSlice'
 
 function CreateAccount() {
 
