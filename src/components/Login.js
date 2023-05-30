@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import axios from "axios"
-import {useDispatch, useSelector} from "react-redux"
-import { setUserLogin , selecUserName} from '../features/user/UserSlice'
+import {useDispatch} from "react-redux"
+import { setUserLogin} from '../features/user/UserSlice'
 import { useNavigate} from 'react-router-dom'
 
 function Login() {
