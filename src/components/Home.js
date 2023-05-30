@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import Card from './Card'
 import SideBar from './SideBar'
-import { Link } from 'react-router-dom';
 import {useSelector} from "react-redux"
 import {selecUserName} from '../features/user/UserSlice'
 
