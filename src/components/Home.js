@@ -64,47 +64,10 @@ const CardWrapper = styled.div `
     display: flex;
 `
 
-const AddCard = styled.div `
-    background-color: #DDDACD;
-    width: 240px;
-    height: 154px;
-    perspective: 1000px;
-    border-radius: 2vh;
-    margin: 0 3vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`
-
-const AddButton = styled.div `
-    border-radius: 50%;
-    height: 4.5em;
-    width: 4.5em;
-    background-color: #B6B4AB99;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    cursor: pointer;
-`
-
-const AddSymbol = styled.div `
-    font-size: 3em;
-    color: #172B3A;
-`
 
 const AccountsTitle = styled.div `
     font-size: 4.5vh;
     font-weight: 600;
     color: #E98A15;
     margin: 0 0 3vh 3vw;
-`
-
-const StyledLink = styled(Link) `
-    color: #172B3A;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
 `
